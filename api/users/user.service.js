@@ -47,7 +47,7 @@ module.exports = {
         )
     },
     updateUsers:(data,callBack)=>{
-        pool,query(
+        pool.query(
             'UPDATE registration set firstname=?,lastname=?,gender=?,email=?,password=?,number=? where id =?',
             [
                 data.first_name,
