@@ -1,6 +1,7 @@
-const { create,getUsers,getUserByUserId,updateUsers,deleteUser } = require("./user.service")
+const { create,getUsers,getUserByUserId,updateUsers,deleteUser,getUserByuserEmail} = require("./user.service")
 
-const {genSaltSync,hashSync} = require ("bcrypt")
+const {genSaltSync,hashSync, compareSync} = require ("bcrypt")
+const { sign }= require("jsonwebtoken")
 
 module.exports = {
     createUser: (req,res)=>{
@@ -64,6 +65,12 @@ module.exports = {
                     message: "Database connection error"
                 })
             }
+            if (!results) {
+                return res.json({
+                    success: 0,
+                    message:"Failed to update user"
+                })
+            }
             return res.json({
                 success : 1,
                 message: "update successfully"
@@ -84,5 +91,36 @@ module.exports = {
                 })
             }
         })
+    },
+    login: (req,res)=>{
+       const body = req.body
+       getUserByuserEmail(body.email,(err,results)=>{
+        if (err) {
+            console.log(err)
+        }
+        if (!results) {
+            return res.json({
+                success:0,
+                data:"Invalid email or password"
+            })
+        }
+        const result = compareSync(body.password,results.password)
+        if (result) {
+            results.password = undefined;
+            const jsontoken = sign ({result: results}, "qwe1234",{
+              expiresIn: "1h"  
+            })
+            return res.json({
+                success: 1,
+                message: " login successfully",
+                token: jsontoken
+            })
+        }else{
+            return res.json({
+                success:0,
+                data: "invalid email or password"
+            })
+        }
+       }) 
     }
 }
