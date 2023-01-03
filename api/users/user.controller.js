@@ -7,7 +7,7 @@ module.exports = {
     createUser: (req,res)=>{
         const body = req.body
         const salt = genSaltSync(10)
-        body.password = hashSync(body.password, salt);
+        body.employee_pass = hashSync(body.employee_pass, salt);
         create(body, (err, results)=>{
             if(err){
                 console.log(err)
@@ -56,7 +56,7 @@ module.exports = {
     updateUsers: (req,res)=>{
         const body = req.body
         const salt = genSaltSync(10)
-        body.password = hashSync(body.password, salt);
+        body.employee_pass = hashSync(body.employee_pass, salt);
         updateUsers(body, (err, results)=>{
             if(err){
                 console.log(err)
@@ -104,9 +104,9 @@ module.exports = {
                 data:"Invalid email or password"
             })
         }
-        const result = compareSync(body.password,results.password)
+        const result = compareSync(body.employee_pass,results.employee_pass)
         if (result) {
-            results.password = undefined;
+            results.employee_pass = undefined;
             const jsontoken = sign ({result: results}, "qwe1234",{
               expiresIn: "1h"  
             })
