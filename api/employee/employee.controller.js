@@ -1,4 +1,4 @@
-const {createEmployee, getEmpByuserEmail,getEmpByEmpId,getUsers} = require("./employee.service")
+const {createEmployee, getEmpByuserEmail,getEmpByEmpId,getemp} = require("./employee.service")
 const {genSaltSync,hashSync, compareSync} = require ("bcrypt")
 const { sign ,decode }= require("jsonwebtoken")
 
@@ -59,7 +59,6 @@ module.exports = {
              const jsontoken = sign ({result: results},"qwe1234",{
                expiresIn: "1h"  
              })
-             console.log(decode(jsontoken))
              return res.json({
                  success: 1,
                  message: " login successfully",
@@ -73,8 +72,8 @@ module.exports = {
          }
         }) 
      },
-     getUsers: (req,res)=>{
-        getUsers((err,results)=>{
+     getemp: (req,res)=>{
+        getemp((err,results)=>{
             if (err) {
                 console.log(err)
                 return

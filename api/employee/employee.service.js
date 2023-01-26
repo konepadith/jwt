@@ -62,10 +62,10 @@ module.exports = {
     //         }
     //     )
     // },
-    getUsers: callBack=>{
+    getEmpByEmpId: (id,callBack)=>{
         pool.query(
-            `SELECT * FROM  tb_province`,
-            [],
+            `SELECT * FROM  tb_employee where employee_id=?`,
+            [id],
             (error,results,fields)=>{
                 if (error) {
                 return callBack(error)
