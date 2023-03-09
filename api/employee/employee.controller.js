@@ -3,11 +3,14 @@ const {genSaltSync,hashSync, compareSync} = require ("bcrypt")
 const { sign ,decode }= require("jsonwebtoken")
 
 module.exports = {
+    
     createEmp : (req,res)=>{
         const body = req.body
+        
         const salt = genSaltSync(10)
-        body.employee_pass = hashSync(body.employee_pass, salt)
+        body.employee_password = hashSync(body.employee_password, salt)
         createEmployee(body,(err,results)=>{
+            console.log(body)
             if (err) {
                 console.log(err)
                 return res.status(500).json({

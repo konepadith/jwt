@@ -62,6 +62,18 @@ module.exports = {
             }
         )
     },
+    getMajor: callBack=>{
+        pool.query(
+            `SELECT * FROM  tb_major`,
+            [],
+            (error,results,fields)=>{
+                if (error) {
+                return callBack(error)
+                }
+                return callBack(null,results)
+            }
+        )
+    },
     getPosition: callBack=>{
         pool.query(
             `SELECT * FROM  tb_position`,

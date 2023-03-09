@@ -1,4 +1,4 @@
-const { getProvince, getDistrict, getVillage,getCompany,getDepartment,getPosition } = require("./utility.service")
+const { getProvince, getDistrict, getVillage,getCompany,getDepartment,getPosition,getMajor } = require("./utility.service")
 
 const { genSaltSync, hashSync, compareSync } = require("bcrypt")
 const { sign } = require("jsonwebtoken")
@@ -54,6 +54,18 @@ module.exports = {
     },
     ControlDepartment: (req, res) => {
         getDepartment((err, results) => {
+            if (err) {
+                console.log(err)
+                return
+            }
+            return res.json({
+                success: 1,
+                data: results
+            })
+        })
+    },
+    ControlMajor: (req, res) => {
+        getMajor((err, results) => {
             if (err) {
                 console.log(err)
                 return

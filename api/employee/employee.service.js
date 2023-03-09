@@ -4,31 +4,39 @@ const pool = require("../../config/database")
 module.exports = {
     createEmployee : (data, callBack)=>{
         pool.query(
-            `insert into tb_employee (employee_code,
+            `insert into tb_employee (
+                employee_code,
                 employee_name,
                 employee_surname,
                 employee_gender,
                 employee_email,
-                employee_pass,
+                employee_password,
                 employee_dob,
                 employee_phonenumber,
+                company_id,
+                department_id,
+                major_id,
+                position_id,
                 id_village,
                 id_district,
-                id_province,
-                employee_img) values(?,?,?,?,?,?,?,?,?,?,?,?)`,
+                id_province
+                ) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
             [
                 data.employee_code,
                 data.employee_name,
                 data.employee_surname,
                 data.employee_gender,
                 data.employee_email,
-                data.employee_pass,
+                data.employee_password,
                 data.employee_dob,
                 data.employee_phonenumber,
+                data.company_id,
+                data.department_id,
+                data.major_id,
+                data.position_id,
                 data.id_village,
                 data.id_district,
                 data.id_province,
-                data.employee_img,
             ],
             (error,results,fields)=>{
                if (error) {
