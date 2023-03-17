@@ -86,4 +86,52 @@ module.exports = {
             }
         )
     },
+    insertDepartment : (data, callBack)=>{
+        pool.query(
+            `insert into tb_department (
+                department_id,
+                department_code,
+                department_name,
+                department_namela,
+                department_std,
+                ) values(?,?,?,?,?)`,
+            [
+                data.department_id,
+                data.department_code,
+                data.department_name,
+                data.department_namela,
+                data.department_std,
+            ],
+            (error,results,fields)=>{
+               if (error) {
+                return callBack(error)
+               }
+               return callBack(null, results)
+            }
+        )
+    },
+    insertPosition : (data, callBack)=>{
+        pool.query(
+            `insert into tb_department (
+                position_id,
+                position_code,
+                position_name,
+                position_namela,
+                position_std,
+                ) values(?,?,?,?,?)`,
+            [
+                data.position_id,
+                data.position_code,
+                data.position_name,
+                data.position_namela,
+                data.position_std,
+            ],
+            (error,results,fields)=>{
+               if (error) {
+                return callBack(error)
+               }
+               return callBack(null, results)
+            }
+        )
+    },
 }
