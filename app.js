@@ -9,12 +9,14 @@ app.use(express.json())
 const userRouter = require("./api/users/user.router")
 const empRouter = require("./api/employee/employee.router")
 const utlRouter = require("./api/utility/utility.router")
+const salaryRouter = require("./api/salary/salary.router")
 app.use(cors())
 
 
 app.use("/api/users", userRouter)
 app.use("/api/employee", empRouter)
 app.use("/api/utility",utlRouter)
+app.use("/api/salary",salaryRouter)
 app.listen(process.env.APP_PORT,()=>{
     console.log("Server up and running on PORT :",process.env.APP_PORT)
 })
